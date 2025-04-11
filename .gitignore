@@ -1,0 +1,41 @@
+# General development files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.ipynb_checkpoints/
+.DS_Store
+.env
+.venv/
+venv/
+
+# Model files
+enron-email-generator/
+*.safetensors
+*.bin
+*.pth
+*.h5
+
+# Data files
+enron_data/
+*.csv
+*.txt
+*.tgz*
+*_tmp
+
+# Logs and results
+logs/
+results/
+
+# Training artifacts
+*.tfevents.*
+checkpoints/
+
+# IDE specific
+.vscode/
+.idea/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
