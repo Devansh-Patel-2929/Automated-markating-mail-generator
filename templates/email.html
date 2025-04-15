@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Inbox</title>
+    <style>
+        .email-container {
+            width: 800px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+        }
+        
+        .email-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin: 10px 0;
+            padding: 15px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .email-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .email-subject {
+            font-weight: bold;
+            color: #1a73e8;
+            margin-bottom: 10px;
+        }
+        
+        .email-body {
+            color: #5f6368;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        
+        .form-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .form-row {
+            margin: 10px 0;
+            position: relative;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+        }
+        
+        button {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .random-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <h1 style="text-align: center">Marketing Email Generator</h1>
+        
+        <!-- Generation Form -->
+        <div class="form-container">
+            <form method="POST">
+                <div class="form-row">
+                    <label>From:</label>
+                    <input type="email" name="from" id="fromField" required>
+                    <button type="button" class="random-btn" onclick="randomEmail('fromField')">Random</button>
+                </div>
+                
+                <div class="form-row">
+                    <label>To:</label>
+                    <input type="email" name="to" id="toField" required>
+                    <button type="button" class="random-btn" onclick="randomEmail('toField')">Random</button>
+                </div>
+                
+                <div class="form-row">
+                    <label>Subject:</label>
+                    <input type="text" name="subject" id="subjectField" required>
+                    <button type="button" class="random-btn" onclick="randomSubject()">Random</button>
+                </div>
+                
+                <div class="form-row">
+                    <label>Context:</label>
+                    <textarea name="context" rows="3" required></textarea>
+                </div>
+                
+                <button type="submit">Generate Email</button>
+            </form>
+        </div>
+
+        <!-- Email List -->
+        <div class="email-list">
+            {% for email in emails %}
+            <div class="email-card">
+                <div class="email-header">
+                    <div><strong>From:</strong> {{ email['from'] }}</div>
+                    <div><strong>To:</strong> {{ email['to'] }}</div>
+                </div>
+                <div class="email-subject">{{ email['subject'] }}</div>
+                <div class="email-body">{{ email['body'] }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        const sampleEmails = [
+            "marketing@company.com",
+            "sales@business.org",
+            "support@startup.io",
+            "newsletter@techhub.com",
+            "promotions@ecommerce.net"
+        ];
+
+        const sampleSubjects = [
+            "Exciting New Product Launch!",
+            "Limited Time Offer Inside",
+            "Special Discount for Valued Customers",
+            "Revolutionary Update Released",
+            "Exclusive Deal Just for You"
+        ];
+
+        function randomEmail(fieldId) {
+            const randomEmail = sampleEmails[Math.floor(Math.random() * sampleEmails.length)];
+            document.getElementById(fieldId).value = randomEmail;
+        }
+
+        function randomSubject() {
+            const randomSubject = sampleSubjects[Math.floor(Math.random() * sampleSubjects.length)];
+            document.getElementById('subjectField').value = randomSubject;
+        }
+    </script>
+</body>
+</html>
